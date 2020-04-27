@@ -30,6 +30,20 @@ class HttpManager {
                 'Content-Type': "application/json"
             });
             let response = await fetch(url, { method: 'POST', body: JSON.stringify(param), headers: headers });
+            console.log(response);
+            if (response.status == 200) {
+                let responseJson = await response.json();
+                return responseJson;
+            }
+            else return false;
+        } catch (err) {
+            return false;
+        }
+    }
+
+    async deleteFetch(url) {
+        try {
+            let response = await fetch(url, { method: 'DELETE' });
             if (response.status == 200) {
                 let responseJson = await response.json();
                 return responseJson;

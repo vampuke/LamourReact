@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { View, StatusBar, StyleSheet, Image, Button, Text } from 'react-native';
+import React from 'react';
+import { View, StatusBar, StyleSheet, Image, Button } from 'react-native';
 import * as GlobalStyle from '../style/globalStyle';
 import { TextInput } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
-import Api from '../service/httpService';
-import { user } from '../redux/actions'
+import { user } from '../redux/actions';
 import LocalStorage from '../common/storage';
 import * as Config from '../common/Config';
-import * as Address from '../service/address';
+import UserSvc from '../service/userService';
+import { Actions } from 'react-native-router-flux';
 
 class LoginPage extends React.Component {
 
@@ -25,6 +25,7 @@ class LoginPage extends React.Component {
             let name = await LocalStorage.read(Config.USER_NAME);
             if (name && name.length) {
                 this.setState({ user_name: name });
+                this.param.user_name = name;
             }
         } catch (err) { }
     }
@@ -39,15 +40,9 @@ class LoginPage extends React.Component {
     }
 
     async loginIn() {
-        let res = await Api.postFetch(Address.LOGIN, this.param);
-        console.log(res);
-        if (res && !res.code) {
-            try {
-                await LocalStorage.save(Config.USER_INFO, JSON.stringify(res));
-                await LocalStorage.save(Config.USER_NAME, this.param.user_name);
-                this.props.user(res);
-            }
-            catch (err) { }
+        let res = await UserSvc.login(this.param);
+        if (res) {
+            this.props.user(res);
         }
     }
 

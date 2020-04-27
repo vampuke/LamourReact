@@ -4,17 +4,25 @@ import * as GlobalStyle from '../style/globalStyle';
 import { Actions } from 'react-native-router-flux';
 import LocalStorage from '../common/storage';
 import * as Config from '../common/Config';
+import { connect } from 'react-redux';
+import { user } from '../redux/actions';
 
 
-export default class WelcomePage extends Component {
+class WelcomePage extends Component {
+
+    constructor(props) {
+        super(props);
+    }
 
     async componentDidMount() {
-        let test = await LocalStorage.read(Config.USER_INFO);
+        let userInfo = await LocalStorage.read(Config.USER_INFO);
         try {
-            console.log(JSON.parse(test));
+            if (userInfo !== null && userInfo.length) {
+                this.props.user(JSON.parse(userInfo));
+            }
         } catch (err) { }
         setTimeout(() => {
-            Actions.reset('LoginPage');
+            Actions.reset('MainPage');
         }, 1000);
     }
 
@@ -38,3 +46,8 @@ const styles = StyleSheet.create({
         width: GlobalStyle.screenWidth
     }
 });
+
+export default connect(
+    null,
+    { user }
+)(WelcomePage)

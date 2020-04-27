@@ -1,4 +1,4 @@
-const host = "https://jessie.vampuck.com/"
+const host = "http://192.168.50.100:5050/"
 
 export const LOGIN = host + "user/login";
 
