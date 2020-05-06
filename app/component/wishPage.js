@@ -24,10 +24,7 @@ class WishPage extends Component {
     }
 
     async componentDidMount() {
-        setTimeout(async () => {
-            await this.getWish();
-
-        }, 5000);
+        await this.getWish();
     }
 
     componentDidUpdate() {
@@ -45,12 +42,10 @@ class WishPage extends Component {
 
     wishAction(wish) {
         this.setState({ selectedWish: wish });
-        console.log(this.state.selectedWish, 'ssele');
         this.setState({ modalShow: true });
     }
 
     deleteWish() {
-        console.log(this.state.selectedWish);
         if (this.state.selectedWish) {
             Alert.alert(
                 "Confirm",
@@ -88,7 +83,7 @@ class WishPage extends Component {
         let res = await WishSvc.wishStatus(req);
         if (res) {
             await this.getWish();
-            this.setState({ modalShow: false });
+            this.setState({ modalShow: false, selectedWish: null });
         }
         this.setState({ loading: false });
     }
@@ -113,11 +108,7 @@ class WishPage extends Component {
                         </TouchableOpacity>
                     </View>
                 </Modal>
-                <Modal animationType="fade"
-                    visible={this.state.loading}
-                    transparent={true}>
-                    <Loading />
-                </Modal>
+                <Loading visible={this.state.loading} />
                 <SafeAreaView style={styles.container}>
                     <ScrollView style={styles.scrollView}
                         ref={(view) => { this.wishScroll = view; }}
@@ -178,7 +169,6 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     const { wishDisplayFilter } = state;
     const display_list = getWishByFilter(state, wishDisplayFilter);
-    console.log(state);
     return {
         display_list,
         currentFilter: state.wishDisplayFilter

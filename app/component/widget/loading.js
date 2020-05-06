@@ -9,11 +9,15 @@ class Loading extends React.Component {
 
     render() {
         return (
-            <View style={styles.modal}>
-                <View style={styles.wrapper}>
-                    <ActivityIndicator size="large" color={GlobalStyle.ThemeColor} />
+            <Modal visible={this.props.visible}
+                animationType="fade"
+                transparent={true}>
+                <View style={styles.modal}>
+                    <View style={styles.wrapper}>
+                        <ActivityIndicator size="large" color={GlobalStyle.ThemeColor} />
+                    </View>
                 </View>
-            </View>
+            </Modal>
         )
     }
 }

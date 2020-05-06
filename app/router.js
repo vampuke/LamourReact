@@ -10,6 +10,7 @@ import wishPage from './component/wishPage';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { View, Text } from 'react-native';
 import * as GlobalStyle from './style/globalStyle';
+import VoucherPage from './component/voucherPage';
 
 const getRouter = () => {
     return (
@@ -39,8 +40,8 @@ const getRouter = () => {
                             title={'Wish'}
                             icon={WishIcon}
                             iconName={'magic'} />
-                        <Scene key="WishPageer"
-                            component={wishPage}
+                        <Scene key="VoucherPage"
+                            component={VoucherPage}
                             hideNavBar
                             title={'Voucher'}
                             icon={WishIcon}
@@ -54,9 +55,9 @@ const getRouter = () => {
                         <Scene key="Wishersdsd"
                             component={wishPage}
                             hideNavBar
-                            title={'FLower'}
+                            title={'Restaurant'}
                             icon={WishIcon}
-                            iconName={'gift'} />
+                            iconName={'cutlery'} />
                     </Scene>
                 </Scene>
             </Lightbox>

@@ -19,11 +19,11 @@ class WelcomePage extends Component {
         try {
             if (userInfo !== null && userInfo.length) {
                 this.props.user(JSON.parse(userInfo));
+                Actions.reset('MainPage');
+            } else {
+                Actions.reset('LoginPage');
             }
-        } catch (err) { }
-        setTimeout(() => {
-            Actions.reset('MainPage');
-        }, 1000);
+        } catch (err) { Actions.reset('LoginPage'); }
     }
 
     render() {

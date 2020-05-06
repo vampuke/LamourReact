@@ -24,7 +24,6 @@ class WishNavBar extends React.Component {
     }
 
     async addWishWorker() {
-        console.log(this.state.wishTitle);
         this.setState({ loading: true });
         let req = {
             title: this.state.wishTitle
@@ -79,12 +78,7 @@ class WishNavBar extends React.Component {
                 <TouchableWithoutFeedback onPress={() => { this.addWish() }}>
                     <Icon name="plus" size={30} style={styles.addBtn} />
                 </TouchableWithoutFeedback>
-                <Modal
-                    animationType="fade"
-                    visible={this.state.loading}
-                    transparent={true} >
-                    <Loading />
-                </Modal>
+                <Loading visible={this.state.loading} />
                 <Modal animationType="fade"
                     visible={this.state.addWishModal}
                     transparent={true}>
@@ -98,12 +92,12 @@ class WishNavBar extends React.Component {
                             />
                             <View style={{ flexDirection: 'row-reverse' }}>
                                 <TouchableOpacity onPress={() => { this.addWishWorker() }} style={styles.modalBtn} disabled={!this.state.wishTitle.length}>
-                                    <Text style={{ color: '#fff', textAlign: 'center' }}>
+                                    <Text style={{ color: GlobalStyle.actionGreen, textAlign: 'center' }}>
                                         Add
                                     </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => { this.setState({ addWishModal: false, wishTitle: '' }) }} style={{ ...styles.modalBtn }}>
-                                    <Text style={{ color: '#fff', textAlign: 'center' }}>
+                                    <Text style={{ color: GlobalStyle.actionGreen, textAlign: 'center' }}>
                                         Cancel
                                     </Text>
                                 </TouchableOpacity>
@@ -184,15 +178,12 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         paddingTop: 10,
         paddingBottom: 10,
-        borderRadius: 10,
         paddingLeft: 16,
         paddingRight: 16,
-        backgroundColor: GlobalStyle.actionGreen,
     }
 })
 
 const mapStateToProps = state => {
-    console.log(state);
     const { wishDisplayFilter } = state;
     const length = getWishListNumber(state, wishDisplayFilter);
     return {
