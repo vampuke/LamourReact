@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StatusBar, StyleSheet, Image, Button, TouchableWithoutFeedback, SafeAreaView, ActivityIndicator, ScrollView, RefreshControl, Modal, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback, SafeAreaView, ActivityIndicator, ScrollView, RefreshControl, Modal, TouchableOpacity, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { user, voucher_list } from '../redux/actions';
-import Icon from 'react-native-vector-icons/FontAwesome'
 import * as GlobalStyle from '../style/globalStyle';
 import VoucherSvc from '../service/voucherService';
-import WishNavBar from './widget/wishNavBar';
 import { getVoucherByFilter } from '../redux/voucherActions';
-import { WISH_FILTERS, VOUCHER_TYPE } from '../common/constant';
+import { VOUCHER_TYPE } from '../common/constant';
 import Loading from './widget/loading';
 import VoucherNavBar from './widget/voucherNavBar';
 
@@ -87,7 +85,7 @@ class VoucherPage extends Component {
                         {this.props.display_list && this.props.display_list.length != 0
                             ? this.props.display_list.map((voucher, index) => {
                                 return (
-                                    <View style={styles.voucherItem}>
+                                    <View style={styles.voucherItem} key={voucher.id}>
                                         <View style={styles.voucherDetail}>
                                             <View style={{ height: 80, width: 170, justifyContent: "center", paddingLeft: 14 }}>
                                                 <Text style={{ fontSize: 20, color: '#fff' }}>
@@ -135,9 +133,9 @@ class VoucherPage extends Component {
                                         </View>
                                         <View style={styles.dashWrapper}>
                                             <View style={{ ...styles.halfRound, top: -7 }}></View>
-                                            {dashArr.map((dash) => {
+                                            {dashArr.map((dash, index) => {
                                                 return (
-                                                    <View style={styles.dash} key={dash}></View>
+                                                    <View style={styles.dash} key={index}></View>
                                                 )
                                             })}
                                             <View style={{ ...styles.halfRound, bottom: -7 }}></View>

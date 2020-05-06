@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { View, Text } from 'react-native';
 import * as GlobalStyle from './style/globalStyle';
 import VoucherPage from './component/voucherPage';
+import AnnivPage from './component/annivPage';
 
 const getRouter = () => {
     return (
@@ -46,18 +47,18 @@ const getRouter = () => {
                             title={'Voucher'}
                             icon={WishIcon}
                             iconName={'ticket'} />
-                        <Scene key="WishPageersdsd"
-                            component={wishPage}
+                        <Scene key="AnnivPage"
+                            component={AnnivPage}
                             hideNavBar
                             title={'Anniv'}
                             icon={WishIcon}
                             iconName={'calendar'} />
-                        <Scene key="Wishersdsd"
+                        {/* <Scene key="Wishersdsd"
                             component={wishPage}
                             hideNavBar
                             title={'Restaurant'}
                             icon={WishIcon}
-                            iconName={'cutlery'} />
+                            iconName={'cutlery'} /> */}
                     </Scene>
                 </Scene>
             </Lightbox>

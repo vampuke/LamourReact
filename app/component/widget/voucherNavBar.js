@@ -116,7 +116,6 @@ class VoucherNavBar extends React.Component {
                                     style={styles.input}
                                     onChangeText={text => this.onQuantityChange(text)}
                                     value={this.state.quantity.toString()}
-                                    textContentType={Number}
                                 />
                             </View>
                             {
